@@ -12,7 +12,6 @@ public interface TodoRepository extends CrudRepository<TodoEntity, Long> {
     @Query("SELECT todo FROM TodoEntity todo WHERE todo.id = :id")
     List<TodoEntity> findById(@Param("id") int id);
 
-
     @Query("SELECT todo FROM TodoEntity todo WHERE todo.userId = :userId")
     List<TodoEntity> findByUserId(@Param("userId") int userId);
 

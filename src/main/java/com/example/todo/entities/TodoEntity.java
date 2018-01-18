@@ -1,12 +1,10 @@
 package com.example.todo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "todos")
 public class TodoEntity {
 
     @Id
@@ -14,8 +12,12 @@ public class TodoEntity {
     private Long id;
 
     private int userId;
-    private Date date;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date = new Date();
+
     private String content;
+
     private Boolean completed;
 
     public Long getId() {
