@@ -1,16 +1,26 @@
 package com.example.todo.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "users")
 public class UserEntity {
 
-    private UserEntity(String name, String email) {
-        setName(name);
-        setEmail(email);
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String name;
+
+    private String email;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -20,25 +30,12 @@ public class UserEntity {
         this.name = name;
     }
 
-    private String email;
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public static List<UserEntity> getUsers() {
-
-        ArrayList<UserEntity> userEntities = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            userEntities.add(new UserEntity("User" + i, "user" + i + "@mail.com"));
-        }
-
-        return userEntities;
     }
 
 }
