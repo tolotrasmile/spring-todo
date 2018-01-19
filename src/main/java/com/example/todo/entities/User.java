@@ -1,19 +1,19 @@
 package com.example.todo.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "users")
-public class UserEntity implements Serializable {
+public class User implements Serializable {
+
+    public User(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private String name;
-
-    private String email;
 
     public Long getId() {
         return id;
@@ -31,12 +31,5 @@ public class UserEntity implements Serializable {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    private String name;
 }
