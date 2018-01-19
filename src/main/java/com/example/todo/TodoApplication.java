@@ -3,13 +3,20 @@ package com.example.todo;
 import com.example.todo.dao.TodoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 @SpringBootApplication
 public class TodoApplication {
+
+
+    @Autowired
+    private StringRedisTemplate template;
 
     public static void main(String[] args) {
         SpringApplication.run(TodoApplication.class, args);
@@ -19,20 +26,16 @@ public class TodoApplication {
 
     @Bean
     public CommandLineRunner todo(TodoRepository repository) {
-        return (args) -> log.info("");
-    }
-
-    /*
-    @Bean
-    public CommandLineRunner users(UserRepository repository) {
         return (args) -> {
-            repository.deleteAll();
-            FakerService service = new FakerService();
-            repository.save(service.createFakeUsers(100));
-            log.info("");
+            ValueOperations<String, String> ops = this.template.opsForValue();
+            String key = "spring.boot.redis.test";
+            if (!this.template.hasKey(key)) {
+                ops.set(key, "foo");
+            }
+            System.out.println("Found key " + key + ", value=" + ops.get(key));
         };
     }
-*/
+
 }
 
 
