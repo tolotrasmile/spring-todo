@@ -13,7 +13,7 @@ public interface UserRedisRepository {
 
     Map<Object, User> findAll();
 
-    User findAllById(Long userId);
+    User findById(Long userId);
 
     void update(User userEntity);
 
@@ -42,7 +42,7 @@ class UserRedisRepositoryImpl implements UserRedisRepository {
     }
 
     @Override
-    public User findAllById(Long userId) {
+    public User findById(Long userId) {
         return this.hashOperations.get(USER_HASH, userId);
     }
 

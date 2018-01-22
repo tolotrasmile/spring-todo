@@ -25,11 +25,14 @@ public class TodoApplication {
     @Bean
     public CommandLineRunner todo(TodoRepository repository, StringRedisTemplate template) {
         return (args) -> {
+
             ValueOperations<String, String> ops = template.opsForValue();
             String key = "spring.boot.redis.test";
+
             if (!template.hasKey(key)) {
                 ops.set(key, "foo");
             }
+
             System.out.println("Found key " + key + ", value=" + ops.get(key));
         };
     }
